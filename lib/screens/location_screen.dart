@@ -66,14 +66,23 @@ class _LocationScreenState extends State<LocationScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   TextButton(
-                    onPressed: () {},
+                    onPressed: () async{
+                      var weatherData=await weather.getWeatherWithLocation();
+                      updateUI(weatherData);
+                    },
                     child: Icon(
                       Icons.near_me,
                       size: 50.0,
                     ),
                   ),
                   TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (context){
+                        return CityScreen();
+                      }
+                      ),
+                      );
+                    },
                     child: Icon(
                       Icons.location_city,
                       size: 50.0,
