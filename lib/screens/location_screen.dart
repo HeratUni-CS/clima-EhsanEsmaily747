@@ -6,7 +6,7 @@ import 'city_screen.dart';
 class LocationScreen extends StatefulWidget {
   @override
   LocationScreen({required this.weatherData});
-  final dynamic weatherData;
+  dynamic weatherData;
 
   _LocationScreenState createState() => _LocationScreenState();
 }
@@ -82,8 +82,9 @@ class _LocationScreenState extends State<LocationScreen> {
                       }
                       ),
                       );
+                      print(cityName);
                       if (cityName!=null) {
-                        var weatherData= await weather.getWeatherWithLocation();
+                        var weatherData= await weather.getWeatherWithName(cityName);
                         updateUI(weatherData);
                       }
                     },
