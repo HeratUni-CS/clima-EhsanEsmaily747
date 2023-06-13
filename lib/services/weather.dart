@@ -7,12 +7,20 @@ const url='https://api.openweathermap.org/data/2.5/weather';
 
 class WeatherModel {
 
-  Future<dynamic> getWeatherWithName(String cityNmae) async{
-    NetworkHelper weatherData=NetworkHelper(url:'$url?q=$cityNmae&appid=$apiKey&units=metric');
+  Future<dynamic> getWeatherWithName(String cityName) async{
+    NetworkHelper weatherData=NetworkHelper(url:'$url?q=$cityName&appid=$apiKey&units=metric');
     return await weatherData.getData();
   }
 
+  Future<dynamic> getWeatherWithLocation() async{
+    Location location=Location();
+    await location.getCurrentLocation();
 
+    NetworkHelper networkHelper= NetworkHelper(url: '$url?lat=${location.latitude}&lon=${location.longitude}&appid=$apiKey&units=metric');
+
+    var data=await networkHelper.getData();
+    return data;
+  }
 
 
   String getWeatherIcon(int condition) {
